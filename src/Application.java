@@ -19,6 +19,8 @@ public class Application {
         Scanner console = new Scanner(System.in);
         int j = Integer.parseInt(console.nextLine());
         System.out.println("This is happy day");
+        System.out.println("This is happy day else");
+        System.out.println("This is happy day else no");
 
 
 
