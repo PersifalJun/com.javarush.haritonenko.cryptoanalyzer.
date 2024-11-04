@@ -9,7 +9,7 @@ public class Application {
         // 3. Brute force
         // 4. Статистический анализ
         // 0. Выход
-        System.out.println("Шифровальщик метьодом цезароя");
+        System.out.println("Шифровальщик методом цезароя");
         System.out.println("Выберите пункт меню");
         System.out.println("1. Шифрование с ключом");
         System.out.println("2. Расшифровка с ключом");
