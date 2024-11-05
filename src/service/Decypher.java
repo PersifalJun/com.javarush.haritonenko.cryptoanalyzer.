@@ -60,7 +60,7 @@ public class Decypher {
         return decryptedData;
 
     }
-    public static void writeFileaAfterDecryption(String fileName,String data){
+    public static void WriteFileAfterDecryption(String fileName,String data){
         Path pathOfnewFile = Paths.get(fileName);
         try(BufferedWriter writer = Files.newBufferedWriter(pathOfnewFile)){
             writer.write(data);

@@ -1,8 +1,15 @@
 
-
+import java.util.Scanner;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.util.List;
 import service.Cypher;
 
-import java.util.Scanner;
+
 public class Application {
 
     public static void main(String[] args){
@@ -24,25 +31,20 @@ public class Application {
         switch(choice){
             case 1 :
                 System.out.println("Выполняется шифрование ключом");
-                System.out.println("Введитe ключ : ");
-                int key = console.nextInt();
-                while (key<0 || key > Integer.MAX_VALUE){
 
-                    System.out.println("Вы ввели неправильный ключ, введите ключ снова");
-                    key = console.nextInt();
-                }
-                Cypher.OpenFileforEncryption();
+                Cypher.OpenFileForEncryption();
+
+                System.out.println("Файл зашифрован!");
+
+                Cypher.PrintDataFromEncryptedFile();
+
+
 
                 break;
             case 2 :
                 System.out.println("Выполняется расшифровка с ключом");
                 System.out.println("Введитe ключ : ");
-                key = console.nextInt();
-                while (key<0 || key > Integer.MAX_VALUE){
 
-                    System.out.println("Вы ввели неправильный ключ, введите ключ снова");
-                    key = console.nextInt();
-                }
                 break;
             case 3 :
                 System.out.println("Выполняется расшифровка текста с помощью brute force");
