@@ -45,9 +45,15 @@ public class Cypher {
 
                 System.out.println("Введите новый файл для записи зашифрованного текста: ");
 
+                console.nextLine(); //Для корректного получекния пути к файлу
+
                 String PathOfEncryptedFile = console.nextLine();
 
                 WriteFileAfterEncryption(PathOfEncryptedFile,encryptedWords); // запись в новый файл зашифрованного текста
+
+                System.out.println("Данные в зашифрованном файле: ");
+                System.out.println();
+                PrintDataFromEncryptedFile(PathOfEncryptedFile);
 
             }
             catch(IOException e){
@@ -58,7 +64,7 @@ public class Cypher {
         else{
             System.out.println("The specified file does not exist");
         }
-        console.close();
+
 
 
 
@@ -92,6 +98,17 @@ public class Cypher {
     }
     public static void WriteFileAfterEncryption(String fileName,List<String> data){ // Функция для записи в новый файл зашифрованного текста
         Path pathOfNewFile = Paths.get(fileName);
+
+        if(!Files.exists(pathOfNewFile.getParent()) && pathOfNewFile.getParent()!=null){
+            try{
+                Files.createDirectories(pathOfNewFile.getParent());
+                System.out.println("Каталог создан: " + pathOfNewFile.getParent());
+            }
+            catch(IOException e){
+                System.out.println("Каталог не создан" + e.getMessage());
+            }
+
+        }
         try(BufferedWriter writer = Files.newBufferedWriter(pathOfNewFile)){
             for(String line : data){ //Запись каждой строки в файл
                 writer.write(line);
@@ -106,10 +123,8 @@ public class Cypher {
         }
 
     }
-    public static void PrintDataFromEncryptedFile(){
-        Scanner console = new Scanner(System.in);
-        String Filepath = console.nextLine();
-        Path path = Paths.get(Filepath);
+    public static void PrintDataFromEncryptedFile(String PathOfEncryptedFile ){
+        Path path = Paths.get(PathOfEncryptedFile);
         if(Files.exists(path)){
             try(BufferedReader reader = Files.newBufferedReader(path)){
                 String line;
@@ -128,7 +143,7 @@ public class Cypher {
         else{
             System.out.println("The specified file does not exist");
         }
-        console.close();
+
 
 
     }

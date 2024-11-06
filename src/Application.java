@@ -1,4 +1,5 @@
 
+import java.sql.SQLOutput;
 import java.util.Scanner;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -36,8 +37,6 @@ public class Application {
 
                 System.out.println("Файл зашифрован!");
 
-                Cypher.PrintDataFromEncryptedFile();
-
 
 
                 break;
@@ -55,15 +54,6 @@ public class Application {
 
 
         }
-
-
-
-
-
-
-
-
-
 
     }
 }
