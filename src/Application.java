@@ -1,13 +1,12 @@
 
-import java.sql.SQLOutput;
+
+/*Рекомендации к использованию программы :
+1).Для работы с шифрованием создайте два файла формата txt (например, в файле FileBeforeBeingEncrypted
+будет содержаться текст до шифрования, а во второй файл EncryptedFile будет записан этот зашифрованный текст.
+*/
+
+
 import java.util.Scanner;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.io.IOException;
-import java.nio.file.Files;
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
-import java.util.List;
 import service.Cypher;
 
 
@@ -31,13 +30,12 @@ public class Application {
         int choice = Integer.parseInt(console.nextLine());
         switch(choice){
             case 1 :
+
                 System.out.println("Выполняется шифрование ключом");
 
                 Cypher.OpenFileForEncryption();
-
+                System.out.println();
                 System.out.println("Файл зашифрован!");
-
-
 
                 break;
             case 2 :

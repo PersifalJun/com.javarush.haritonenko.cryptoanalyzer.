@@ -16,7 +16,9 @@ import java.util.List;
 public class Cypher {
     private static final char[] ALPHABET = {'а', 'б', 'в', 'г', 'д', 'е', 'ж', 'з',
             'и','к', 'л', 'м', 'н', 'о', 'п', 'р', 'с', 'т', 'у', 'ф', 'х', 'ц', 'ч', 'ш', 'щ',
-            'ъ', 'ы', 'ь', 'э', 'я', '.', ',', '«', '»', '"', '\'', ':', '!', '?', ' '};
+            'ъ', 'ы', 'ь', 'э', 'я','A', 'Б', 'В', 'Г', 'Д', 'Е', 'Ж', 'З',
+            'И','К', 'Л', 'М', 'Н', 'О', 'П', 'Р', 'С', 'Т', 'У', 'Ф', 'Х', 'Ц', 'Ч', 'Ш', 'Щ',
+            'Ъ', 'Ы', 'Ь', 'Э', 'Я', '.', ',', '«', '»', '"', '\'', ':', '!', '?', ' '};
     private static final int ALPHABET_SIZE = ALPHABET.length;
 
     public static void OpenFileForEncryption(){
@@ -24,7 +26,19 @@ public class Cypher {
         Scanner console = new Scanner(System.in);
         String Filepath = console.nextLine();
         Path path = Paths.get(Filepath);
+
         if(Files.exists(path)){
+            try{
+                if (Files.size(path) == 0){
+                    System.out.println("Ошибка : Файл пустой");
+                    return;
+                }
+            }catch(IOException e){
+                System.out.println("Ошибка при проверке файла: " +e.getMessage());
+                return;
+            }
+
+
             try(BufferedReader reader = Files.newBufferedReader(path)){
                 List<String> words = new ArrayList<>(); // Массив для разбиения текста в файле на слова
                 String line;
@@ -77,12 +91,12 @@ public class Cypher {
         return encryptedWords;
     }
 
-    public static StringBuilder Encryption(String data, int key){ // Функция для шифрования каждого слова
+    public static StringBuilder Encryption(String data, int key){ // Функция для шифрования каждого слова по методу цезаря
 
         int trueKey = key % ALPHABET_SIZE;                            //Правильный ключ
         StringBuilder encryptedData = new StringBuilder();
         for (char elem : data.toCharArray()){
-            int index = data.indexOf(elem);
+            int index = getIndexFromAlphabet(elem);
             if (index !=-1){
                 int shiftIndex = (index + trueKey) % ALPHABET_SIZE;
                 encryptedData.append(ALPHABET[shiftIndex]);
@@ -95,6 +109,14 @@ public class Cypher {
 
         return encryptedData;
 
+    }
+    private static int getIndexFromAlphabet(char charElem){ //Функция для получения индекса элемента из алфавита
+        for(int i = 0; i< ALPHABET.length;i++){
+            if(ALPHABET[i] == charElem){
+                return i;
+            }
+        }
+        return -1;
     }
     public static void WriteFileAfterEncryption(String fileName,List<String> data){ // Функция для записи в новый файл зашифрованного текста
         Path pathOfNewFile = Paths.get(fileName);
