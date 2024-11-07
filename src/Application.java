@@ -2,12 +2,15 @@
 
 /*Рекомендации к использованию программы :
 1).Для работы с шифрованием создайте два файла формата txt (например, в файле FileBeforeBeingEncrypted
-будет содержаться текст до шифрования, а во второй файл EncryptedFile будет записан этот зашифрованный текст.
+будет содержаться текст до шифрования, а во второй файл EncryptedFile будет записан этот зашифрованный текст).
+2).Для работы с шифрованием можно использовать файл EncryptedFile из пунтка 1. Нужно создать файл формата txt для записи (например, DecryptedFile)
+, туда запишется информация после расшифровки.
 */
 
 
 import java.util.Scanner;
 import service.Cypher;
+import service.Decypher;
 
 
 public class Application {
@@ -34,20 +37,24 @@ public class Application {
                 System.out.println("Выполняется шифрование ключом");
 
                 Cypher.OpenFileForEncryption();
-                System.out.println();
-                System.out.println("Файл зашифрован!");
+
+
 
                 break;
             case 2 :
                 System.out.println("Выполняется расшифровка с ключом");
-                System.out.println("Введитe ключ : ");
+                Decypher.OpenFileforDecryption();
+
+
 
                 break;
             case 3 :
                 System.out.println("Выполняется расшифровка текста с помощью brute force");
                 break;
-            default:
+            case 0:
                 System.out.println("Выход");
+            default:
+                System.out.println("Выберите один из предложенных пунктов");
 
 
 
