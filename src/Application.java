@@ -39,17 +39,16 @@ public class Application {
                 Cypher.OpenFileForEncryption();
 
 
-
                 break;
             case 2 :
                 System.out.println("Выполняется расшифровка с ключом");
                 Decypher.OpenFileforDecryption();
 
 
-
                 break;
             case 3 :
                 System.out.println("Выполняется расшифровка текста с помощью brute force");
+
                 break;
             case 0:
                 System.out.println("Выход");
