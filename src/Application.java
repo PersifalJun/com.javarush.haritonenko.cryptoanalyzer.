@@ -9,6 +9,8 @@
 
 
 import java.util.Scanner;
+
+import service.BruteForceDecypher;
 import service.Cypher;
 import service.Decypher;
 
@@ -48,6 +50,7 @@ public class Application {
                 break;
             case 3 :
                 System.out.println("Выполняется расшифровка текста с помощью brute force");
+                BruteForceDecypher bruteForceDecypher = new BruteForceDecypher();
 
                 break;
             case 0:
