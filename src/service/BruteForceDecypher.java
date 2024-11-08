@@ -68,12 +68,18 @@ public class BruteForceDecypher{
 
             if (ArraysBeingCompared(decryptedWords,originalWords)){
                 System.out.println("Найден верный ключ: "+ key);
-                WriteToFileAfterBruteforce(String.join(" ",decryptedWords),key);
+                System.out.println("Введите новый файл для записи расшифрованного текста: ");
+
+
+
+                String PathOfDecryptedFile = console.nextLine();
+                WriteToFileAfterBruteforce(PathOfDecryptedFile,decryptedWords);
                 keyIsFound = true;
                 System.out.println("Файл расшифрован!");
 
             }
             else{
+                System.out.println("Текущий ключ : "+ key);
                 key++;
             }
         }
@@ -186,21 +192,32 @@ public class BruteForceDecypher{
 
 
 
-    private static void WriteToFileAfterBruteforce(String decryptedText, int key) {     // Метод для записи расшифрованных данных в файл
-
-        String fileName = "Decrypted_text_key_" + key + ".txt";
-
+    public static void  WriteToFileAfterBruteforce(String fileName,List<String> data){        // Функция для записи в новый файл зашифрованного текста
         Path pathOfNewFile = Paths.get(fileName);
 
+        if(!Files.exists(pathOfNewFile.getParent()) && pathOfNewFile.getParent()!=null){  // Проверка на отсутствие каталога
+            try{
+                Files.createDirectories(pathOfNewFile.getParent());
+                System.out.println("Каталог создан: " + pathOfNewFile.getParent());
+            }
+            catch(IOException e){
+                System.out.println("Каталог не создан" + e.getMessage());
+            }
 
-        try (BufferedWriter writer = Files.newBufferedWriter(pathOfNewFile)) {
-            writer.write(decryptedText);
-            writer.newLine();  // Добавляем новую строку
-            System.out.println("Записано в файл: " + fileName);
-            PrintDataFromFileAfterBruteForce(fileName);
-        } catch (IOException e) {
-            System.out.println("Ошибка при записи файла: " + e.getMessage());
         }
+        try(BufferedWriter writer = Files.newBufferedWriter(pathOfNewFile)){   //Использование буффера для записи
+            for(String line : data){                                           //Запись каждой строки в файл
+                writer.write(line);
+                writer.newLine();                                              //Добавление перевода строки
+            }
+            PrintDataFromFileAfterBruteForce(fileName);
+            System.out.println("Данные записаны в файл " + fileName);
+        }
+        catch(IOException e){
+            System.out.println("Ошибка при записи файла: " + e.getMessage());
+
+        }
+
     }
 
     public static void PrintDataFromFileAfterBruteForce(String PathOfEncryptedFile ){ // Функция для вывода зашифрованного содержимого файла
