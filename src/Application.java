@@ -30,25 +30,16 @@ public class Application {
         int choice = Integer.parseInt(console.nextLine());
         switch(choice){
             case 1 :
-
                 System.out.println("Выполняется шифрование ключом");
-
                 Cypher.OpenFileForEncryption();
-
-
                 break;
             case 2 :
                 System.out.println("Выполняется расшифровка с ключом");
                 Decypher.OpenFileforDecryption();
-
-
                 break;
             case 3 :
                 System.out.println("Выполняется расшифровка текста с помощью brute force");
                 BruteForceDecypher.OpenDecryptedFileForBruteForce();
-
-
-
                 break;
             case 0:
                 System.out.println("Выход");

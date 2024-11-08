@@ -43,7 +43,7 @@ public class Cypher {
 
 
             try(BufferedReader reader = Files.newBufferedReader(path)){     //Использование буффера для чтения
-                List<String> words = new ArrayList<>(); // Массив для разбиения текста в файле на слова
+                List<String> words = new ArrayList<>();                     // Массив для разбиения текста в файле на слова
                 String line;
                 System.out.println("File data:");
                 while((line=reader.readLine())!=null){
@@ -54,33 +54,30 @@ public class Cypher {
                 System.out.println("Введитe ключ : ");
                 try{
                     int key = console.nextInt();
-                    while (key<0){       //Проверка на неподходящий ключ
+                    while (key<0){                                          //Проверка на неподходящий ключ
 
                         System.out.println("Вы ввели неправильный ключ, введите ключ снова");
                         key = console.nextInt();
                     }
-                    List<String> encryptedWords = encryptWords(words,key); // Получение списка зашифрованных слов после вызова функции encryptWords
 
+                    List<String> encryptedWords = EncryptWords(words,key);                         // Получение списка зашифрованных слов после вызова функции encryptWords
                     System.out.println("Введите новый файл для записи зашифрованного текста: ");
-
-                    console.nextLine(); //Для корректного получекния пути к файлу
-
+                    console.nextLine();                                                            //Для корректного получекния пути к файлу
                     String PathOfEncryptedFile = console.nextLine();
-
-                    WriteFileAfterEncryption(PathOfEncryptedFile,encryptedWords); // Запись в новый файл зашифрованного текста
+                    WriteFileAfterEncryption(PathOfEncryptedFile,encryptedWords);                  // Запись в новый файл зашифрованного текста
 
                     System.out.println("Данные в зашифрованном файле: ");
                     System.out.println();
-                    PrintDataFromEncryptedFile(PathOfEncryptedFile); // Вывод зашифрованого содержимого в новом файле
+                    PrintDataFromEncryptedFile(PathOfEncryptedFile);                               // Вывод зашифрованого содержимого в новом файле
                     System.out.println("Файл зашифрован!");
 
                 }
-                catch(InputMismatchException E){
+                catch(InputMismatchException E){                                                    //Ошибка в случае ввода ключа больше чем Integer.MAX_VALUE;
                     System.out.println("Слишком большое значение ключа");
                 }
 
             }
-            catch(IOException e){                       //Ошибка в случае ввода ключа больше чем Integer.MAX_VALUE;
+            catch(IOException e){
                 System.out.println("Ошибка чтения файла");
             }
 
@@ -89,7 +86,7 @@ public class Cypher {
             System.out.println("Указанный файл не существует");
         }
     }
-    public static List<String> encryptWords(List<String> words,int key){  // Функция для реализации списка с зашифрованными словами
+    public static List<String> EncryptWords(List<String> words,int key){  // Функция для реализации списка с зашифрованными словами
         List<String> encryptedWords = new ArrayList();
         for(var word : words){
             encryptedWords.add(Encryption(word,key).toString()); // Использование функции шифрования слов
