@@ -6,7 +6,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.sql.SQLOutput;
+
 import java.util.ArrayList;
 
 import java.util.List;
@@ -134,7 +134,6 @@ public class BruteForceDecypher{
         for (char elem : data.toCharArray()){
             int index = GetIndexFromAlphabet(elem,ALPHABET);
             if (index !=-1){
-                key++;
                 int indexToCompare = (index + key) % ALPHABET_SIZE;
                 decryptedWords.append(ALPHABET[indexToCompare]);
 

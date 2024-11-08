@@ -57,6 +57,7 @@ public class Application {
                 break;
             case 0:
                 System.out.println("Выход");
+                break;
             default:
                 System.out.println("Выберите один из предложенных пунктов");
 
