@@ -20,7 +20,7 @@ public class BruteForceDecypher{
             'Ъ', 'Ы', 'Ь', 'Э', 'Я', '.', ',', '«', '»', '"', '\'', ':', '!', '?', ' '}; //Алфавит
     private static final int ALPHABET_SIZE = ALPHABET.length;
 
-    public static void OpenDecryptedFileForBruteForce(){   //Функция для открытия зашифрованного файла
+    public static void OpenDecryptedFileForBruteForce(){   //Функция для открытия зашифрованного файла. Использует функции : EncryptWordsAddedToArray,ArraysBeingCompared,WriteToFileAfterBruteforce,PrintDataFromFileAfterBruteForce.
 
         System.out.println("Введите путь к файлу формата txt, который должен быть расшифрован: ");
         Scanner console = new Scanner(System.in);
@@ -58,7 +58,7 @@ public class BruteForceDecypher{
         }
 
         List<String> originalWords = OpenOriginalFile();                    //Список оригинальных слов
-        if (originalWords == null){                                         //Проверка на сущест
+        if (originalWords == null){                                         //Проверка на правильную работу функции OpenOriginalFile
             return;
         }
         int key = 0;                                                        //Начальное значение ключа для перебора
@@ -74,8 +74,8 @@ public class BruteForceDecypher{
 
                 String PathOfDecryptedFile = console.nextLine();                    //Путь к новому файлу, где будет хранититься расшифрованный текст
                 WriteToFileAfterBruteforce(PathOfDecryptedFile,decryptedWords);    //Запись в этот файл
-                PrintDataFromFileAfterBruteForce(PathOfDecryptedFile);
-                keyIsFound = true;                                                          //Конечный режим : ключ найден
+                PrintDataFromFileAfterBruteForce(PathOfDecryptedFile);             //Вывод расшифрованного текста на экран
+                keyIsFound = true;                                                 //Конечный режим : ключ найден
                 System.out.println("Файл расшифрован!");
 
             }
