@@ -43,7 +43,7 @@ public class Cypher {
 
 
             try(BufferedReader reader = Files.newBufferedReader(path)){     //Использование буффера для чтения
-                List<String> words = new ArrayList<>();                     // Массив для разбиения текста в файле на слова
+                List<String> words = new ArrayList<>();                     //Список для разбиения текста в файле на слова
                 String line;
                 System.out.println("File data:");
                 while((line=reader.readLine())!=null){

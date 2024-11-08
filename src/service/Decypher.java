@@ -19,17 +19,17 @@ public class Decypher {
             'Ъ', 'Ы', 'Ь', 'Э', 'Я', '.', ',', '«', '»', '"', '\'', ':', '!', '?', ' '}; //Алфавит
     private static final int ALPHABET_SIZE = ALPHABET.length;
 
-    public static void OpenFileForDecryption(){                                             //  Функция для открытия файла
+    public static void OpenFileForDecryption(){                                             //Функция для открытия файла. Здесь использованы функции: DecryptWords, WriteFileAfterDecryption, PrintDataFromDecryptedFile(PathOfDecryptedFile);
         System.out.println("Введите путь к файлу, который должен быть расшифрован: ");
         Scanner console = new Scanner(System.in);
         String Filepath = console.nextLine();
         Path path = Paths.get(Filepath);
-        List<String> WordsNeedDecryption = new ArrayList<>();
+        List<String> WordsNeedDecryption = new ArrayList<>();                               //Список зашифрованных слов
 
-        if(Files.exists(path)){
+        if(Files.exists(path)){                                                             //Проверка на наличие файла
 
             try{
-                if (Files.size(path) == 0){              //Проверка на содержимое файла
+                if (Files.size(path) == 0){                                                 //Проверка на содержимое файла
                     System.out.println("Ошибка : Файл пустой");
                     return;
                 }
@@ -38,7 +38,7 @@ public class Decypher {
                 return;
             }
 
-            try(BufferedReader reader = Files.newBufferedReader(path)){
+            try(BufferedReader reader = Files.newBufferedReader(path)){                     //Использование буффера для чтения
                 String line;
                 System.out.println("File data:");
                 while((line=reader.readLine())!=null){
@@ -63,19 +63,19 @@ public class Decypher {
                 System.out.println("Вы ввели неправильный ключ, введите ключ снова");
                 key = console.nextInt();
             }
-            List<String> decryptedWords = DecryptWords(WordsNeedDecryption,key);
+            List<String> decryptedWords = DecryptWords(WordsNeedDecryption,key);                //Список с расшифрованными словами
             System.out.println("Введите новый файл для записи расшифрованного текста: ");
 
-            console.nextLine();                                    //Для корректного получекния пути к файлу
+            console.nextLine();                                                                //Для корректного получекния пути к файлу
 
-            String PathOfDecryptedFile = console.nextLine();
-            WriteFileAfterDecryption(PathOfDecryptedFile,decryptedWords);
+            String PathOfDecryptedFile = console.nextLine();                                   //Путь к файлу с расшифрованным текстом
+            WriteFileAfterDecryption(PathOfDecryptedFile,decryptedWords);                      //Запись файла
             System.out.println("Расшифрованные данные в файле: ");
             System.out.println();
-            PrintDataFromDecryptedFile(PathOfDecryptedFile); // Вывод расшифрованого содержимого в новом файле
+            PrintDataFromDecryptedFile(PathOfDecryptedFile);                                    // Вывод расшифрованого содержимого в новом файле
             System.out.println("Текст документа расшифрован!");
         }
-        catch(InputMismatchException E){                            //Ошибка в случае ввода ключа больше чем Integer.MAX_VALUE;
+        catch(InputMismatchException E){                                                        //Ошибка в случае ввода ключа больше чем Integer.MAX_VALUE;
             System.out.println("Слишком большое значение ключа");
         }
 
@@ -86,8 +86,8 @@ public class Decypher {
 
 
 
-    public static StringBuilder Decryption(String Data, int key){ // Функция для расшифровки
-        int trueKey = key %ALPHABET_SIZE;              // Правильное значение ключа
+    public static StringBuilder Decryption(String Data, int key){                   // Функция для расшифровки слов
+        int trueKey = key %ALPHABET_SIZE;                                           // Правильное значение ключа
         StringBuilder decryptedData = new StringBuilder();
         for (char elem : Data.toCharArray()){
             int index = GetIndexFromALphabet(elem);
@@ -103,7 +103,7 @@ public class Decypher {
         return decryptedData;
 
     }
-    private static int GetIndexFromALphabet(char charElem) {
+    private static int GetIndexFromALphabet(char charElem) {                               //Функция для получения индекса из Алфавита
         for (int i = 0; i < ALPHABET.length; i++) {
             if (ALPHABET[i] == charElem) {
                 return i;
@@ -111,10 +111,10 @@ public class Decypher {
         }
         return -1;
     }
-    public static List<String> DecryptWords(List<String> words, int key){  // Функция для реализации списка с расшифрованными словами
+    public static List<String> DecryptWords(List<String> words, int key){               // Функция для реализации списка с расшифрованными словами
         List<String> decryptedWords = new ArrayList();
         for(var word : words){
-            decryptedWords.add(Decryption(word,key).toString()); // Использование функции расшифровки слов
+            decryptedWords.add(Decryption(word,key).toString());                        // Использование функции расшифровки слов
         }
         return decryptedWords;
     }

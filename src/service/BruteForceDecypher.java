@@ -20,17 +20,17 @@ public class BruteForceDecypher{
             'Ъ', 'Ы', 'Ь', 'Э', 'Я', '.', ',', '«', '»', '"', '\'', ':', '!', '?', ' '}; //Алфавит
     private static final int ALPHABET_SIZE = ALPHABET.length;
 
-    public static void OpenDecryptedFileForBruteForce(){  //Функция для открытия зашифрованного файла
+    public static void OpenDecryptedFileForBruteForce(){   //Функция для открытия зашифрованного файла
 
-        System.out.println("Введите путь к файлу формата txt, который должен быть зашифрован: ");
+        System.out.println("Введите путь к файлу формата txt, который должен быть расшифрован: ");
         Scanner console = new Scanner(System.in);
         String Filepath = console.nextLine();
         Path path = Paths.get(Filepath);
-        List<String> encryptedWords = new ArrayList<>();   // Массив для разбиения текста в файле на слова
+        List<String> encryptedWords = new ArrayList<>();    // Список для разбиения текста в файле на слова
 
-        if(Files.exists(path)){                           //Проверка на существование файла
+        if(Files.exists(path)){                            //Проверка на существование файла
             try{
-                if (Files.size(path) == 0){              //Проверка на содержимое файла
+                if (Files.size(path) == 0){                //Проверка на содержимое файла
                     System.out.println("Ошибка : Файл пустой");
                     return;
                 }
@@ -57,29 +57,30 @@ public class BruteForceDecypher{
             System.out.println("Указанный файл не существует");
         }
 
-        List<String> originalWords = OpenOriginalFile();
-        if (originalWords == null){
+        List<String> originalWords = OpenOriginalFile();                    //Список оригинальных слов
+        if (originalWords == null){                                         //Проверка на сущест
             return;
         }
-        int key = 0;
-        boolean keyIsFound = false;
+        int key = 0;                                                        //Начальное значение ключа для перебора
+        boolean keyIsFound = false;                                         //Начальные режим : ключ не найден
         while(!keyIsFound && key<ALPHABET_SIZE){
-            List<String> decryptedWords = EncryptWordsAddedToArray(encryptedWords,key);
+            List<String> decryptedWords = EncryptWordsAddedToArray(encryptedWords,key);     // Получение списка зашифрованных слов во время работы цикла while
 
-            if (ArraysBeingCompared(decryptedWords,originalWords)){
+            if (ArraysBeingCompared(decryptedWords,originalWords)){                         // Проверка равенства списка зишифрованных слов и списка оригинальных слов
                 System.out.println("Найден верный ключ: "+ key);
                 System.out.println("Введите новый файл для записи расшифрованного текста: ");
 
 
 
-                String PathOfDecryptedFile = console.nextLine();
-                WriteToFileAfterBruteforce(PathOfDecryptedFile,decryptedWords);
-                keyIsFound = true;
+                String PathOfDecryptedFile = console.nextLine();                    //Путь к новому файлу, где будет хранититься расшифрованный текст
+                WriteToFileAfterBruteforce(PathOfDecryptedFile,decryptedWords);    //Запись в этот файл
+                PrintDataFromFileAfterBruteForce(PathOfDecryptedFile);
+                keyIsFound = true;                                                          //Конечный режим : ключ найден
                 System.out.println("Файл расшифрован!");
 
             }
             else{
-                System.out.println("Текущий ключ : "+ key);
+                System.out.println("Текущий ключ : "+ key);                                 //Печать всех неподходящих ключей
                 key++;
             }
         }
@@ -92,16 +93,16 @@ public class BruteForceDecypher{
 
 
 
-    public static List<String> OpenOriginalFile(){  //Функция для открытия оригинального файла
+    public static List<String> OpenOriginalFile(){                                    //Функция для открытия оригинального файла
         System.out.println("Введите путь к оригинальному файлу формата txt: ");
         Scanner console = new Scanner(System.in);
         String Filepath = console.nextLine();
         Path path = Paths.get(Filepath);
-        List<String> originalWords = new ArrayList<>();             // Массив для разбиения текста в файле на слова
+        List<String> originalWords = new ArrayList<>();                               // Список для разбиения текста в файле на слова
 
-        if(Files.exists(path)){                           //Проверка на существование файла
+        if(Files.exists(path)){                                                       //Проверка на существование файла
             try{
-                if (Files.size(path) == 0){              //Проверка на содержимое файла
+                if (Files.size(path) == 0){                                            //Проверка на содержимое файла
                     System.out.println("Ошибка : Файл пустой");
 
                 }
@@ -110,7 +111,7 @@ public class BruteForceDecypher{
 
             }
 
-            try(BufferedReader reader = Files.newBufferedReader(path)){     //Использование буффера для чтения
+            try(BufferedReader reader = Files.newBufferedReader(path)){             //Использование буффера для чтения
                 String line;
                 System.out.println("File data:");
                 while((line=reader.readLine())!=null){
@@ -135,7 +136,7 @@ public class BruteForceDecypher{
 
 
 
-    public static StringBuilder EncryptedWordsToCharArray(String data,int key){
+    public static StringBuilder EncryptedWordsToCharArray(String data,int key){         //Функция шифрования каждого слова
         StringBuilder decryptedWords = new StringBuilder();
         for (char elem : data.toCharArray()){
             int index = GetIndexFromAlphabet(elem,ALPHABET);
@@ -155,10 +156,10 @@ public class BruteForceDecypher{
 
 
 
-    public static List<String> EncryptWordsAddedToArray(List<String> words,int key){  // Функция для реализации списка с зашифрованными словами
+    public static List<String> EncryptWordsAddedToArray(List<String> words,int key){                // Функция для реализации списка с зашифрованными словами
         List<String> encryptedWords = new ArrayList();
         for(var word : words){
-            encryptedWords.add(EncryptedWordsToCharArray(word, key).toString()); // Использование функции шифрования слов
+            encryptedWords.add(EncryptedWordsToCharArray(word, key).toString());                    // Использование функции шифрования слов
         }
         return encryptedWords;
     }
@@ -177,7 +178,7 @@ public class BruteForceDecypher{
 
 
 
-    private static boolean ArraysBeingCompared(List<String> decryptedWords,List<String> originalWords){
+    private static boolean ArraysBeingCompared(List<String> decryptedWords,List<String> originalWords){     //Функция сравнения списка зашифрованных слов и списка оригинальных слов
         if(decryptedWords.size()!= originalWords.size())
             return false;
         for(int i =0 ; i< decryptedWords.size();i++){
@@ -192,10 +193,10 @@ public class BruteForceDecypher{
 
 
 
-    public static void  WriteToFileAfterBruteforce(String fileName,List<String> data){        // Функция для записи в новый файл зашифрованного текста
+    public static void  WriteToFileAfterBruteforce(String fileName,List<String> data){                     // Функция для записи в новый файл зашифрованного текста
         Path pathOfNewFile = Paths.get(fileName);
 
-        if(!Files.exists(pathOfNewFile.getParent()) && pathOfNewFile.getParent()!=null){  // Проверка на отсутствие каталога
+        if(!Files.exists(pathOfNewFile.getParent()) && pathOfNewFile.getParent()!=null){                   // Проверка на отсутствие каталога
             try{
                 Files.createDirectories(pathOfNewFile.getParent());
                 System.out.println("Каталог создан: " + pathOfNewFile.getParent());
@@ -210,7 +211,7 @@ public class BruteForceDecypher{
                 writer.write(line);
                 writer.newLine();                                              //Добавление перевода строки
             }
-            PrintDataFromFileAfterBruteForce(fileName);
+
             System.out.println("Данные записаны в файл " + fileName);
         }
         catch(IOException e){
