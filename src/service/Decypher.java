@@ -12,7 +12,7 @@ import java.util.List;
 import java.util.Scanner;
 
 public class Decypher {
-     private static final char[] ALPHABET = {'а', 'б', 'в', 'г', 'д', 'е', 'ж', 'з',
+    private static final char[] ALPHABET = {'а', 'б', 'в', 'г', 'д', 'е', 'ж', 'з',
             'и','к', 'л', 'м', 'н', 'о', 'п', 'р', 'с', 'т', 'у', 'ф', 'х', 'ц', 'ч', 'ш', 'щ',
             'ъ', 'ы', 'ь', 'э', 'я','A', 'Б', 'В', 'Г', 'Д', 'Е', 'Ж', 'З',
             'И','К', 'Л', 'М', 'Н', 'О', 'П', 'Р', 'С', 'Т', 'У', 'Ф', 'Х', 'Ц', 'Ч', 'Ш', 'Щ',
@@ -78,8 +78,6 @@ public class Decypher {
         catch(InputMismatchException E){                            //Ошибка в случае ввода ключа больше чем Integer.MAX_VALUE;
             System.out.println("Слишком большое значение ключа");
         }
-
-
 
 
 

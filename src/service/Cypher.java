@@ -1,3 +1,4 @@
+
 package service;
 
 import java.util.ArrayList;
@@ -87,10 +88,6 @@ public class Cypher {
         else{
             System.out.println("Указанный файл не существует");
         }
-
-
-
-
     }
     public static List<String> encryptWords(List<String> words,int key){  // Функция для реализации списка с зашифрованными словами
         List<String> encryptedWords = new ArrayList();

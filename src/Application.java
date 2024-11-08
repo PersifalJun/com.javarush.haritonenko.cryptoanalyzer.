@@ -50,7 +50,9 @@ public class Application {
                 break;
             case 3 :
                 System.out.println("Выполняется расшифровка текста с помощью brute force");
-                BruteForceDecypher bruteForceDecypher = new BruteForceDecypher();
+                BruteForceDecypher.OpenDecryptedFileForBruteForce();
+
+
 
                 break;
             case 0:
