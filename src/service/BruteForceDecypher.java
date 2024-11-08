@@ -134,7 +134,7 @@ public class BruteForceDecypher{
         for (char elem : data.toCharArray()){
             int index = GetIndexFromAlphabet(elem,ALPHABET);
             if (index !=-1){
-                int indexToCompare = (index + key) % ALPHABET_SIZE;
+                int indexToCompare = (index - key + ALPHABET_SIZE) % ALPHABET_SIZE;
                 decryptedWords.append(ALPHABET[indexToCompare]);
 
             }
@@ -204,11 +204,11 @@ public class BruteForceDecypher{
     }
 
     public static void PrintDataFromFileAfterBruteForce(String PathOfEncryptedFile ){ // Функция для вывода зашифрованного содержимого файла
+        System.out.println("Расшифрованный текст:");
         Path path = Paths.get(PathOfEncryptedFile);
         if(Files.exists(path)){                                                //Проверка на существование файла
             try(BufferedReader reader = Files.newBufferedReader(path)){        //Использование буффера для чтения
                 String line;
-                System.out.println("Расшифрованный текст:");
                 while((line=reader.readLine())!=null){
                     System.out.println(line);
 
