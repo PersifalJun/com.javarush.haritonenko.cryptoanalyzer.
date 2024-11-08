@@ -35,7 +35,7 @@ public class Application {
                 break;
             case 2 :
                 System.out.println("Выполняется расшифровка с ключом");
-                Decypher.OpenFileforDecryption();
+                Decypher.OpenFileForDecryption();
                 break;
             case 3 :
                 System.out.println("Выполняется расшифровка текста с помощью brute force");

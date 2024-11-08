@@ -23,7 +23,7 @@ public class Cypher {
             'Ъ', 'Ы', 'Ь', 'Э', 'Я', '.', ',', '«', '»', '"', '\'', ':', '!', '?', ' '}; //Алфавит
     private static final int ALPHABET_SIZE = ALPHABET.length;
 
-    public static void OpenFileForEncryption(){ //Функция для открытия файла. В ней также вызываются функции : encryptWords , getIndexFromAlphabet ,WriteFileAfterEncryption ,PrintDataFromEncryptedFile
+    public static void OpenFileForEncryption(){ //Функция для открытия файла. В ней также вызываются функции : encryptWords ,WriteFileAfterEncryption ,PrintDataFromEncryptedFile
 
         System.out.println("Введите путь к файлу формата txt, который должен быть зашифрован: ");
         Scanner console = new Scanner(System.in);
@@ -113,7 +113,7 @@ public class Cypher {
         return encryptedData;
 
     }
-    private static int getIndexFromAlphabet(char charElem){ //Функция для получения индекса элемента из алфавита
+    private static int getIndexFromAlphabet(char charElem){            //Функция для получения индекса элемента из алфавита
         for(int i = 0; i< ALPHABET.length;i++){
             if(ALPHABET[i] == charElem){
                 return i;
@@ -124,7 +124,7 @@ public class Cypher {
     public static void WriteFileAfterEncryption(String fileName,List<String> data){        // Функция для записи в новый файл зашифрованного текста
         Path pathOfNewFile = Paths.get(fileName);
 
-        if(!Files.exists(pathOfNewFile.getParent()) && pathOfNewFile.getParent()!=null){  // Проверка на отсутствие каталога
+        if(!Files.exists(pathOfNewFile.getParent()) && pathOfNewFile.getParent()!=null){   // Проверка на наличие каталога
             try{
                 Files.createDirectories(pathOfNewFile.getParent());
                 System.out.println("Каталог создан: " + pathOfNewFile.getParent());

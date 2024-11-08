@@ -19,7 +19,7 @@ public class Decypher {
             'Ъ', 'Ы', 'Ь', 'Э', 'Я', '.', ',', '«', '»', '"', '\'', ':', '!', '?', ' '}; //Алфавит
     private static final int ALPHABET_SIZE = ALPHABET.length;
 
-    public static void OpenFileforDecryption(){
+    public static void OpenFileForDecryption(){                                             //  Функция для открытия файла
         System.out.println("Введите путь к файлу, который должен быть расшифрован: ");
         Scanner console = new Scanner(System.in);
         String Filepath = console.nextLine();
