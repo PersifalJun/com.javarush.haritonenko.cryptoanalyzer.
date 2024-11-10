@@ -46,6 +46,7 @@ public class Decypher {
                     WordsNeedDecryption.add(line);
                 }
             }
+
             catch(IOException e){
                 System.out.println("Ошибка чтения файла");
             }
